@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyspark_encoders"
+description = "Encoders to be used in Pyspark ML pipelines"
+requires-python = ">=3.8"
+license = {file = "LICENSE.txt"}
+keywords = ["pyspark", "encoders", "preprocessing"]
+authors = [
+  {name = "Eduardo M. de Morais", email = "emdemor415@gmail.com" }
+]
+maintainers = [
+  {name = "Eduardo M. de Morais", email = "emdemor415@gmail.com" }
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Build Tools",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dynamic = ["version"]
+dependencies = [
+    "pandas"
+]
+[project.optional-dependencies]
+lint = [
+    "black==23.7.0",
+    "flake8==6.1.0",
+    "Flake8-pyproject==1.2.3",
+    "mypy==1.4.1",
+    "bandit==1.7.5",
+]
+test = [
+    "pytest==7.4.0",
+    "pytest-cov==4.1.0",
+    "pytest-mock==3.11.1",
+    "pytest-mypy==0.10.3",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "pyspark_encoders.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.mypy]
+cache_dir = "/tmp/mypy_cache"
+ignore_missing_imports = true
+
+[tool.flake8]
+max-line-length = 120
+ignore = ["D203", "W504"]
+per-file-ignores = ["sample/module.py:E501"]
+
+[tool.back]
+target-version = ["py311"]
+line-length = 120
+extend-ignore = ["D203", "W504"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider -vvv --durations=0 --disable-warnings --cov --cov-report term-missing"
